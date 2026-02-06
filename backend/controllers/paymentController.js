@@ -58,7 +58,7 @@ exports.processPayment = asyncErrorHandler(async (req, res, next) => {
         });
 
     }).catch(function (error) {
-        console.log(error);
+        // handle error silently or use proper logger
     });
 });
 
@@ -127,7 +127,7 @@ exports.paytmResponse = (req, res, next) => {
         });
 
     } else {
-        console.log("Checksum Mismatched");
+        // console.log("Checksum Mismatched");
     }
 }
 
@@ -135,7 +135,7 @@ const addPayment = async (data) => {
     try {
         await Payment.create(data);
     } catch (error) {
-        console.log("Payment Failed!");
+        // Payment Failed
     }
 }
 

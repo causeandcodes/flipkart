@@ -30,7 +30,7 @@ const sendEmail = async (options) => {
         dynamic_template_data: options.data,
     }
     sgMail.send(msg).then(() => {
-        console.log('Email Sent')
+        // Email sent
     }).catch((error) => {
         console.error(error)
     });
