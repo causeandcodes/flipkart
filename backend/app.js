@@ -2,13 +2,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
+const path = require('path');
 const errorMiddleware = require('./middlewares/error');
 
 const app = express();
 
 // config
 if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config({ path: 'backend/config/config.env' });
+  require('dotenv').config({ path: 'backend/config/config.env' });
 }
 
 app.use(express.json());
@@ -27,8 +28,8 @@ const rateLimit = require('express-rate-limit');
 app.use(helmet());
 
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
 
@@ -36,6 +37,12 @@ app.use('/api/v1', user);
 app.use('/api/v1', product);
 app.use('/api/v1', order);
 app.use('/api/v1', payment);
+
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
+});
 
 // error middleware
 app.use(errorMiddleware);
