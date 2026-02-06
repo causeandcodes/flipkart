@@ -28,7 +28,9 @@ const Login = () => {
 
     useEffect(() => {
         if (error) {
-            enqueueSnackbar(error, { variant: "error" });
+            if (error !== "Please Login to Access") {
+                enqueueSnackbar(error, { variant: "error" });
+            }
             dispatch(clearErrors());
         }
         if (isAuthenticated) {
