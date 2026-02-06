@@ -1,14 +1,16 @@
 {
   "name": "flipkart",
   "version": "1.0.0",
-  "description": "Full Stack Flipkart Ecommerce",
+  "description": "Flipkart Ecommerce",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
     "frontend": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run frontend\"",
-    "render-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix frontend && npm run build --prefix frontend"
+    "build": "npm install --prefix frontend && npm run build --prefix frontend",
+    "render-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix frontend && npm run build --prefix frontend",
+    "lint": "eslint ."
   },
   "author": "Bhupathi B",
   "license": "ISC",
@@ -22,6 +24,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.3",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.0",
     "nodemailer": "^6.9.9",
@@ -29,5 +33,13 @@
     "stripe": "^14.17.0",
     "uuid": "^9.0.1",
     "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.8.1"
   }
 }
